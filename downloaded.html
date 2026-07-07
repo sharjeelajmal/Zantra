@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zantrra | Trust Every Transaction</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#131b2e",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#dae2fd",
+                        "outline-variant": "#c7c4d7",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#d5e3fc",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-highest": "#d5e3fc",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "tertiary-container": "#b55d00",
+                        "on-background": "#0d1c2e",
+                        "outline": "#767586",
+                        "tertiary": "#904900",
+                        "surface-container": "#e6eeff",
+                        "on-secondary-container": "#5c647a",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-primary-fixed": "#07006c",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-tint": "#494bd6",
+                        "surface-dim": "#ccdbf3",
+                        "secondary": "#565e74",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#dae2fd",
+                        "on-surface": "#0d1c2e",
+                        "inverse-primary": "#c0c1ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-fixed": "#301400",
+                        "primary-container": "#6063ee",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#464554",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#233144",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "primary-fixed": "#e1e0ff",
+                        "on-primary": "#ffffff",
+                        "primary": "#4648d4",
+                        "surface-bright": "#f8f9ff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdcc5",
+                        "background": "#f8f9ff",
+                        "on-tertiary-fixed-variant": "#703700"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit-xs": "4px",
+                        "unit-xl": "48px",
+                        "container-max-width": "1280px",
+                        "section-padding": "120px",
+                        "unit-sm": "8px",
+                        "unit-md": "16px",
+                        "gutter": "24px",
+                        "unit-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "code-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "code-sm": ["13px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+        .indigo-shadow {
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1);
+        }
+        .transition-spring {
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 200ms;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-on-secondary-fixed/80 backdrop-blur-xl border-b border-outline-variant/30 dark:border-outline/20 shadow-sm transition-all duration-300" id="main-nav">
+<div class="flex justify-between items-center max-w-container-max-width mx-auto px-unit-lg py-unit-md">
+<a class="font-headline-md text-headline-md font-bold tracking-tight text-on-background dark:text-white flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+                Zantrra
+            </a>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 font-label-md text-label-md" href="#how-it-works">How it Works</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 font-label-md text-label-md" href="#features">Features</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 font-label-md text-label-md" href="#demo">Demo</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 font-label-md text-label-md" href="#faq">FAQ</a>
+</div>
+<!-- CTA & Mobile Toggle -->
+<div class="flex items-center gap-4">
+<button class="hidden md:inline-flex bg-primary hover:bg-primary-container text-white font-label-md text-label-md px-6 py-2.5 rounded-lg transition-spring hover:-translate-y-0.5 active:scale-95 shadow-md shadow-primary/20">
+                    Join Waitlist
+                </button>
+<button aria-label="Menu" class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-[80px]">
+<!-- 1. Hero Section -->
+<section class="relative pt-section-padding pb-unit-xl overflow-hidden">
+<div class="absolute inset-0 z-0 bg-gradient-to-b from-surface-container-low to-background pointer-events-none"></div>
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="max-w-container-max-width mx-auto px-unit-lg md:px-gutter relative z-10 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-highest border border-outline-variant/50 text-primary font-label-md text-label-md mb-8">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                    Secure Escrow Marketplace
+                </div>
+<h1 class="font-display-lg text-display-lg md:text-[80px] md:leading-[1.05] tracking-tight text-on-background mb-6 max-w-4xl mx-auto">
+                    Trust Every <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-container">Transaction.</span>
+</h1>
+<p class="font-body-lg text-body-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-10">
+                    The secure marketplace for products and services with escrow protection, service bidding, and real-time trust at the center.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+<button class="w-full sm:w-auto bg-primary text-white px-8 py-4 rounded-xl font-label-md text-label-md transition-spring hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/30 active:scale-95 flex items-center justify-center gap-2">
+                        Try Interactive Demo
+                        <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+<button class="w-full sm:w-auto bg-white border border-outline-variant hover:border-outline text-on-background px-8 py-4 rounded-xl font-label-md text-label-md transition-spring hover:bg-surface-container-lowest active:scale-95 flex items-center justify-center gap-2 soft-shadow">
+<span class="material-symbols-outlined text-lg">play_circle</span>
+                        Watch Video
+                    </button>
+</div>
+<!-- Trust Badges -->
+<div class="pt-8 border-t border-outline-variant/30 max-w-3xl mx-auto">
+<p class="font-label-md text-label-md text-on-surface-variant mb-6 uppercase tracking-wider">Built for Absolute Security</p>
+<div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="flex items-center gap-2 font-label-md text-on-background">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+                            Secure Escrow
+                        </div>
+<div class="flex items-center gap-2 font-label-md text-on-background">
+<span class="material-symbols-outlined text-primary">psychology</span>
+                            AI Protection
+                        </div>
+<div class="flex items-center gap-2 font-label-md text-on-background">
+<span class="material-symbols-outlined text-primary">task_alt</span>
+                            Verified Vendors
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. The Problem -->
+<section class="py-section-padding bg-surface">
+<div class="max-w-container-max-width mx-auto px-unit-lg md:px-gutter">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4 text-on-background">The Hidden Costs of E-Commerce</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Traditional transactions are fraught with risk, leaving both buyers and sellers vulnerable.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Problem Card 1 -->
+<div class="bg-white p-8 rounded-xl border border-outline-variant/50 soft-shadow hover:shadow-md transition-spring group">
+<div class="w-12 h-12 bg-error/10 text-error rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3 text-lg">Payment Before Delivery</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Buyers risk losing funds to non-delivery or substandard goods when forced to pay upfront.</p>
+</div>
+<!-- Problem Card 2 -->
+<div class="bg-white p-8 rounded-xl border border-outline-variant/50 soft-shadow hover:shadow-md transition-spring group">
+<div class="w-12 h-12 bg-error/10 text-error rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3 text-lg">Scams &amp; Fraud</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Sophisticated fraudulent activities plague unprotected peer-to-peer and marketplace transactions.</p>
+</div>
+<!-- Problem Card 3 -->
+<div class="bg-white p-8 rounded-xl border border-outline-variant/50 soft-shadow hover:shadow-md transition-spring group">
+<div class="w-12 h-12 bg-error/10 text-error rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">no_accounts</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3 text-lg">Unverified Sellers</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Lack of rigorous KYC/AML processes allows anonymous bad actors to operate with impunity.</p>
+</div>
+<!-- Problem Card 4 -->
+<div class="bg-white p-8 rounded-xl border border-outline-variant/50 soft-shadow hover:shadow-md transition-spring group">
+<div class="w-12 h-12 bg-error/10 text-error rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">gavel</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3 text-lg">No Reliable Dispute Process</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">When issues arise, parties are often left without objective, enforceable arbitration.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface dark:bg-on-background w-full border-t border-outline-variant/50 dark:border-outline/20">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter max-w-container-max-width mx-auto px-unit-lg py-unit-xl">
+<!-- Brand Column -->
+<div class="col-span-2 md:col-span-1 flex flex-col gap-4">
+<div class="font-headline-md text-headline-md font-bold text-on-background dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+                    Zantrra
+                </div>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant text-sm pr-4">
+                    The secure marketplace for products and services with escrow protection, service bidding, and real-time trust.
+                </p>
+<p class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant mt-auto pt-4">
+                    © 2024 Zantrra. All rights reserved. Secure Escrow Marketplace.
+                </p>
+</div>
+<!-- Links 1 -->
+<div class="flex flex-col gap-3">
+<h4 class="font-label-md text-label-md text-on-background dark:text-white mb-2 uppercase tracking-wider">Product</h4>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Features</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Escrow Engine</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Pricing</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Interactive Demo</a>
+</div>
+<!-- Links 2 -->
+<div class="flex flex-col gap-3">
+<h4 class="font-label-md text-label-md text-on-background dark:text-white mb-2 uppercase tracking-wider">Company</h4>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">About Us</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Careers</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Legal &amp; Privacy</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Contact</a>
+</div>
+<!-- Links 3 -->
+<div class="flex flex-col gap-3">
+<h4 class="font-label-md text-label-md text-on-background dark:text-white mb-2 uppercase tracking-wider">Resources</h4>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Documentation</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">API Reference</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Help Center</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-100 hover:opacity-80 transition-opacity" href="#">Status</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scroll spy for navbar shadow
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body></html>

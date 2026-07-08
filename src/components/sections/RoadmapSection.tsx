@@ -19,7 +19,7 @@ export function RoadmapSection() {
           We are building the trust layer for the next generation of global commerce.
         </p>
 
-        <div className="grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 lg:gap-5">
           {roadmapItems.map((item, i) => (
             <div
               key={item.title}

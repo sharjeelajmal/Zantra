@@ -243,7 +243,7 @@ function IdleChoiceGrid({
   disabled?: boolean;
 }) {
   return (
-    <div className="grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="grid w-full max-w-2xl grid-cols-1 items-stretch gap-4 sm:grid-cols-2">
       <motion.button
         type="button"
         disabled={disabled}
@@ -252,12 +252,12 @@ function IdleChoiceGrid({
         whileTap={{ scale: 0.98 }}
         transition={{ type: 'spring', stiffness: 320, damping: 22 }}
         className={cn(
-          'group relative overflow-hidden rounded-2xl bg-gradient-to-b from-primary/25 to-transparent p-[1px] text-left shadow-[0_20px_40px_-16px_rgba(70,72,212,0.28)]',
+          'group relative flex h-full min-h-[280px] overflow-hidden rounded-2xl bg-gradient-to-b from-primary/25 to-transparent p-[1px] text-left shadow-[0_20px_40px_-16px_rgba(70,72,212,0.28)]',
           disabled && 'pointer-events-none opacity-60',
         )}
         style={{ transformStyle: 'preserve-3d' }}
       >
-        <div className="relative rounded-2xl bg-white/90 p-5 ring-1 ring-white/80 backdrop-blur-xl">
+        <div className="relative flex h-full w-full flex-col rounded-2xl bg-white/90 p-5 ring-1 ring-white/80 backdrop-blur-xl">
           <div className="mb-4 flex items-start justify-between gap-2">
             <IconBox size="md" className="bg-gradient-to-br from-[#eef2ff] to-primary-fixed/40 ring-primary/10">
               <Icon name="shopping_cart" className="size-6" />
@@ -267,10 +267,10 @@ function IdleChoiceGrid({
             </span>
           </div>
           <h3 className="mb-1 font-headline-md text-headline-md text-on-background">Buy Direct</h3>
-          <p className="mb-4 text-xs leading-relaxed text-slate-500">
+          <p className="mb-4 flex-1 text-xs leading-relaxed text-slate-500">
             Skip bidding — lock escrow instantly at the listed price.
           </p>
-          <div className="rounded-xl bg-slate-50/80 p-3 ring-1 ring-slate-900/5">
+          <div className="mt-auto flex min-h-[5.5rem] flex-col justify-center rounded-xl bg-slate-50/80 p-3 ring-1 ring-slate-900/5">
             <p className="truncate text-sm font-semibold text-on-background">{DIRECT_VENDOR.product}</p>
             <p className="truncate text-xs text-slate-500">{DIRECT_VENDOR.name}</p>
             <p className="mt-1 whitespace-nowrap text-lg font-black text-primary">{DIRECT_VENDOR.price}</p>
@@ -286,12 +286,12 @@ function IdleChoiceGrid({
         whileTap={{ scale: 0.98 }}
         transition={{ type: 'spring', stiffness: 320, damping: 22 }}
         className={cn(
-          'group relative overflow-hidden rounded-2xl bg-gradient-to-b from-violet-400/30 to-transparent p-[1px] text-left shadow-[0_20px_40px_-16px_rgba(109,40,217,0.22)]',
+          'group relative flex h-full min-h-[280px] overflow-hidden rounded-2xl bg-gradient-to-b from-violet-400/30 to-transparent p-[1px] text-left shadow-[0_20px_40px_-16px_rgba(109,40,217,0.22)]',
           disabled && 'pointer-events-none opacity-60',
         )}
         style={{ transformStyle: 'preserve-3d' }}
       >
-        <div className="relative rounded-2xl bg-white/90 p-5 ring-1 ring-white/80 backdrop-blur-xl">
+        <div className="relative flex h-full w-full flex-col rounded-2xl bg-white/90 p-5 ring-1 ring-white/80 backdrop-blur-xl">
           <div className="mb-4 flex items-start justify-between gap-2">
             <IconBox size="md" className="bg-gradient-to-br from-violet-50 to-violet-100 ring-violet-500/15">
               <Icon name="gavel" className="size-6 text-violet-600" />
@@ -301,14 +301,14 @@ function IdleChoiceGrid({
             </span>
           </div>
           <h3 className="mb-1 font-headline-md text-headline-md text-on-background">Post Service Request</h3>
-          <p className="mb-4 text-xs leading-relaxed text-slate-500">
+          <p className="mb-4 flex-1 text-xs leading-relaxed text-slate-500">
             Receive competitive bids from verified Guinea vendors.
           </p>
-          <div className="flex items-center gap-2 rounded-xl bg-violet-50/80 p-3 ring-1 ring-violet-500/10">
+          <div className="mt-auto flex min-h-[5.5rem] items-center gap-2 rounded-xl bg-violet-50/80 p-3 ring-1 ring-violet-500/10">
             <motion.span
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="size-2 rounded-full bg-violet-500"
+              className="size-2 shrink-0 rounded-full bg-violet-500"
             />
             <p className="text-xs font-medium text-violet-800">3 vendors ready to bid</p>
           </div>

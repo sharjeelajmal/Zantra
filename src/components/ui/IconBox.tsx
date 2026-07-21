@@ -8,16 +8,17 @@ export interface IconBoxProps {
 }
 
 const sizeClasses = {
-  sm: 'size-9 rounded-xl [&_svg]:size-4',
-  md: 'size-11 rounded-xl [&_svg]:size-5',
-  lg: 'size-12 rounded-2xl [&_svg]:size-6',
+  sm: 'size-9 rounded-xl',
+  md: 'size-11 rounded-xl',
+  lg: 'size-12 rounded-2xl',
 };
 
 export function IconBox({ children, className, size = 'md' }: IconBoxProps) {
   return (
     <div
       className={cn(
-        'inline-flex items-center justify-center text-primary bg-primary/5 ring-1 ring-primary/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]',
+        'inline-flex items-center justify-center overflow-hidden',
+        'bg-white/80 backdrop-blur-sm shadow-sm ring-1 ring-slate-900/5',
         sizeClasses[size],
         className,
       )}

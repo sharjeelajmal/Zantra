@@ -1,8 +1,5 @@
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { Icon } from '@/components/ui/Icon';
-import { IconBox } from '@/components/ui/IconBox';
 import { SectionEyebrow } from '@/components/ui/SectionEyebrow';
-import { aboutItems } from '@/lib/content';
 import { AboutVisual } from '@/components/sections/AboutVisual';
 
 export function AboutSection() {
@@ -16,23 +13,21 @@ export function AboutSection() {
 
           <div>
             <SectionEyebrow>About Zantrra</SectionEyebrow>
-            <h2 className="mb-10 max-w-md text-balance font-headline-lg text-headline-lg-mobile tracking-tighter text-on-background md:text-headline-lg">
-              Commerce built
-              <br />
-              on principle.
+            <h2 className="mb-8 max-w-md text-balance font-headline-lg text-headline-lg-mobile tracking-tighter text-on-background md:text-headline-lg">
+              Building the Trust Infrastructure for Commerce
             </h2>
-            <div className="space-y-8">
-              {aboutItems.map((item) => (
-                <div key={item.title} className="flex gap-4">
-                  <IconBox size="md" className="shrink-0">
-                    <Icon name={item.icon} />
-                  </IconBox>
-                  <div>
-                    <h3 className="mb-1 font-label-md text-label-md font-bold text-on-background">{item.title}</h3>
-                    <p className="text-sm font-body-md text-body-md leading-relaxed text-slate-600">{item.description}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="space-y-5">
+              <p className="font-body-md text-slate-600 leading-relaxed">
+                Every day, millions of people buy products, hire professionals, and conduct business without a trusted
+                system protecting both sides of the transaction. Buyers worry about fraud and non-delivery, while
+                honest businesses worry about completing work without guaranteed payment. This lack of trust slows
+                commerce, limits economic opportunity, and creates unnecessary risk.
+              </p>
+              <p className="font-body-md text-slate-600 leading-relaxed">
+                Zantrra was created to solve this problem. By combining secure escrow, verified identities, competitive
+                bidding, and transparent payments into one platform, we&apos;re building the trust infrastructure that
+                helps buyers, businesses, and professionals transact with confidence.
+              </p>
             </div>
           </div>
         </div>

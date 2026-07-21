@@ -40,7 +40,7 @@ function ProcessingOverlay({ message }: { message: string }) {
           animate={{ rotate: 360 }}
           transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
         >
-          <Icon name="hub" className="size-10 text-primary" />
+          <Icon name="hub" className="size-14 drop-shadow-[0_8px_16px_rgba(15,23,42,0.18)]" />
         </motion.div>
         <p className="text-sm font-semibold text-primary">{message}</p>
       </div>
@@ -81,8 +81,8 @@ export function DemoSellerTab() {
                 animate={{ scale: [1, 1.05, 1], opacity: [0.6, 1, 0.6] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <IconBox size="lg" className="relative size-16 bg-slate-50 text-slate-400 ring-slate-200/80">
-                  <Icon name="storefront" className="size-7" />
+                <IconBox size="lg" className="relative !size-20 bg-transparent ring-0 shadow-none">
+                  <Icon name="storefront" className="size-14 drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)]" />
                 </IconBox>
               </motion.div>
             </div>
@@ -101,9 +101,9 @@ export function DemoSellerTab() {
               <motion.div
                 animate={{ rotate: [0, -8, 8, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="mx-auto mb-3 flex size-12 items-center justify-center rounded-xl bg-violet-50 ring-1 ring-violet-500/15"
+                className="mx-auto mb-3 flex size-14 items-center justify-center rounded-2xl bg-transparent"
               >
-                <Icon name="gavel" className="size-6 text-violet-600" />
+                <Icon name="gavel" className="size-12 drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)]" />
               </motion.div>
               <h3 className="mb-2 font-headline-md text-headline-md text-on-background">Bids in Progress</h3>
               <p className="text-sm leading-relaxed text-slate-600">
@@ -159,7 +159,7 @@ export function DemoSellerTab() {
                 transformStyle: 'preserve-3d',
               }}
             >
-              <Icon name="verified" className="relative size-9 text-emerald-600" />
+              <Icon name="verified" className="relative size-14 drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)]" />
             </motion.div>
             <div className="relative max-w-sm text-center">
               <h3 className="mb-2 font-headline-md text-headline-md text-on-background">Funds Released to Wallet</h3>
@@ -243,7 +243,7 @@ export function DemoSellerTab() {
               </div>
             </motion.div>
             <Button onClick={markDelivered} disabled={isProcessing} className="px-6 py-3">
-              <Icon name="task_alt" className="size-5" />
+              <Icon name="task_alt" className="size-6 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
               Mark as Delivered
             </Button>
           </>
@@ -255,8 +255,8 @@ export function DemoSellerTab() {
               animate={{ rotate: [0, 8, -8, 0] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <IconBox size="lg" className="size-16 bg-amber-50 text-amber-600 ring-amber-500/15">
-                <Icon name="pin" className="size-7" />
+              <IconBox size="lg" className="!size-20 bg-transparent ring-0 shadow-none">
+                <Icon name="pin" className="size-14 drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)]" />
               </IconBox>
             </motion.div>
             <div className="max-w-sm text-center">

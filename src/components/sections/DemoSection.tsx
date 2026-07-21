@@ -46,7 +46,7 @@ function DemoStepPipeline() {
           {/* Track runs only from first icon center → last icon center */}
           <div
             aria-hidden
-            className="pointer-events-none absolute left-[1rem] right-[1rem] top-4 h-px -translate-y-1/2 bg-slate-200/70 sm:left-[1.125rem] sm:right-[1.125rem] sm:top-[1.125rem]"
+            className="pointer-events-none absolute left-[1.5rem] right-[1.5rem] top-6 h-px -translate-y-1/2 bg-slate-200/70 sm:left-[1.75rem] sm:right-[1.75rem] sm:top-7"
           >
             <motion.div
               className="absolute inset-y-0 left-0 h-full origin-left rounded-full bg-gradient-to-r from-primary via-indigo-500 to-violet-600"
@@ -73,15 +73,15 @@ function DemoStepPipeline() {
                   }}
                   transition={{ type: 'spring', stiffness: 400, damping: 22 }}
                   className={cn(
-                    'flex size-8 items-center justify-center rounded-xl ring-2 backdrop-blur-sm sm:size-9',
+                    'flex size-12 items-center justify-center rounded-2xl ring-2 backdrop-blur-sm sm:size-14',
                     isActive
-                      ? 'bg-gradient-to-br from-primary to-violet-700 text-white ring-primary/25'
-                      : 'bg-white text-slate-400 ring-slate-200/80',
+                      ? 'bg-white ring-primary/25'
+                      : 'bg-white ring-slate-200/80',
                   )}
                 >
                   <Icon
                     name={item.icon}
-                    className={cn('size-3.5 sm:size-4', isActive ? 'text-white' : 'text-slate-400')}
+                    className="size-8 drop-shadow-[0_6px_12px_rgba(15,23,42,0.16)] sm:size-9"
                   />
                 </motion.div>
                 <span
@@ -157,7 +157,7 @@ export function DemoSection() {
                 </div>
                 <div className="relative z-10 flex min-w-0 flex-1 justify-center">
                   <div className="flex max-w-[16rem] items-center gap-2 truncate rounded-xl bg-white/70 px-3.5 py-1.5 text-xs font-medium text-slate-500 shadow-[inset_0_1px_2px_rgba(15,23,42,0.04)] ring-1 ring-slate-900/[0.06] backdrop-blur-sm sm:max-w-xs">
-                    <Icon name="shield_lock" className="size-3 shrink-0 text-primary/70" />
+                    <Icon name="shield_lock" className="size-5 shrink-0 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
                     <span className="truncate">demo.zantrra.com</span>
                   </div>
                 </div>
@@ -194,8 +194,7 @@ export function DemoSection() {
                         <Icon
                           name={TAB_LABELS[key].icon}
                           className={cn(
-                            'relative z-10 size-4 shrink-0 sm:size-3.5',
-                            tab === key ? 'text-primary' : 'text-slate-400',
+                            'relative z-10 size-6 shrink-0 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)] sm:size-5',
                           )}
                         />
                         <span className="relative z-10 text-[11px] leading-tight sm:hidden">

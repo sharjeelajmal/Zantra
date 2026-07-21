@@ -1,11 +1,26 @@
+'use client';
+
+import { useState } from 'react';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { Button } from '@/components/ui/Button';
 import { GridBackground } from '@/components/ui/GridBackground';
 import { Icon } from '@/components/ui/Icon';
+import { VideoModal } from '@/components/ui/VideoModal';
 import { heroTrustBadges } from '@/lib/content';
 import { HeroVisual } from '@/components/sections/HeroVisual';
 
+function scrollToDemo() {
+  const target = document.querySelector('#demo');
+  if (!target) return;
+  const nav = document.getElementById('main-nav');
+  const offset = nav?.offsetHeight ?? 72;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
 export function HeroSection() {
+  const [videoOpen, setVideoOpen] = useState(false);
+
   return (
     <AnimatedSection className="relative overflow-hidden bg-white pt-[4.5rem]">
       <GridBackground />
@@ -19,24 +34,33 @@ export function HeroSection() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary shadow-[0_0_8px_rgba(70,72,212,0.8)]" />
               </span>
-              Secure Commerce Infrastructure
+              Trusted Marketplace Infrastructure
             </div>
 
             <h1 className="mb-6 text-balance font-display-lg text-[40px] leading-[1.04] tracking-tighter text-on-background sm:text-[52px] lg:text-[60px]">
-              Trust Every{' '}
-              <span className="text-primary">Transaction.</span>
+              Buy. Sell. Hire.
+              <br />
+              <span className="text-primary">With Complete Confidence.</span>
             </h1>
 
             <p className="mb-10 max-w-lg text-balance font-body-lg text-body-lg leading-relaxed text-slate-600">
-              The secure marketplace for products and services with escrow protection, service bidding, and real-time trust at the center.
+              Zantrra connects buyers, businesses, and skilled professionals through secure escrow payments, verified
+              identities, and trusted transactions creating a safer way to do commerce.
             </p>
 
             <div className="mb-12 grid grid-cols-2 gap-2 lg:flex lg:w-fit lg:gap-3">
-              <Button className="justify-center gap-1 whitespace-nowrap rounded-xl px-2 py-2 text-[10px] leading-tight sm:px-3 sm:py-2.5 sm:text-[11px] md:text-xs lg:gap-2 lg:rounded-2xl lg:px-6 lg:py-3.5 lg:text-sm">
+              <Button
+                onClick={scrollToDemo}
+                className="justify-center gap-1 whitespace-nowrap rounded-xl px-2 py-2 text-[10px] leading-tight sm:px-3 sm:py-2.5 sm:text-[11px] md:text-xs lg:gap-2 lg:rounded-2xl lg:px-6 lg:py-3.5 lg:text-sm"
+              >
                 Try Interactive Demo
                 <Icon name="arrow_forward" className="size-3 shrink-0 sm:size-3.5 lg:size-4" />
               </Button>
-              <Button variant="outline" className="justify-center gap-1 whitespace-nowrap rounded-xl px-2 py-2 text-[10px] leading-tight sm:px-3 sm:py-2.5 sm:text-[11px] md:text-xs lg:gap-2 lg:rounded-2xl lg:px-6 lg:py-3.5 lg:text-sm">
+              <Button
+                variant="outline"
+                onClick={() => setVideoOpen(true)}
+                className="justify-center gap-1 whitespace-nowrap rounded-xl px-2 py-2 text-[10px] leading-tight sm:px-3 sm:py-2.5 sm:text-[11px] md:text-xs lg:gap-2 lg:rounded-2xl lg:px-6 lg:py-3.5 lg:text-sm"
+              >
                 <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-[0_4px_14px_-2px_rgba(70,72,212,0.5)] sm:size-6 lg:size-8">
                   <Icon name="play_arrow" className="size-2.5 text-white sm:size-3 lg:size-3.5" />
                 </span>
@@ -57,6 +81,8 @@ export function HeroSection() {
           <HeroVisual />
         </div>
       </div>
+
+      <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} />
     </AnimatedSection>
   );
 }

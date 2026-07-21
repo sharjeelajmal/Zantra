@@ -18,6 +18,8 @@ export interface Step {
   num: string;
   title: string;
   description: string;
+  /** Maps to /public/assets/icons/{iconName}.svg — placeholder until final 2.5D assets arrive. */
+  iconName: string;
 }
 
 export interface Feature {
@@ -77,6 +79,7 @@ export const navLinks: NavLink[] = [
   { href: '#how-it-works', label: 'How it Works' },
   { href: '#features', label: 'Features' },
   { href: '#about', label: 'About' },
+  { href: '#market', label: 'Market Opportunity' },
   { href: '#faq', label: 'FAQ' },
 ];
 
@@ -118,70 +121,74 @@ export const demoVendors: DemoVendor[] = [
 export const problemCards: ProblemCard[] = [
   {
     icon: 'payments',
-    title: 'Cash-Before-Delivery Risk',
+    title: 'Buyers Fear Losing Their Money',
     description:
-      'Across Guinea and West Africa, buyers routinely pay upfront via mobile money with no guarantee that goods or services will arrive as promised.',
+      'Buyers are often asked to pay before receiving a product or service, creating uncertainty and increasing the risk of fraud, poor workmanship, or non-delivery.',
   },
   {
     icon: 'warning',
-    title: 'P2P Fraud & Scams',
+    title: 'Fraud & Fake Listings',
     description:
-      'Informal peer-to-peer commerce lacks trust rails — impersonation, fake listings, and payment disputes cost communities millions in lost capital annually.',
+      'Scammers, fake businesses, and misleading listings make it difficult to know who can be trusted, resulting in financial losses and reduced confidence in businesses',
   },
   {
     icon: 'no_accounts',
-    title: 'Unverified Vendors',
+    title: 'Trust Is Difficult to Verify',
     description:
-      'Small businesses and independent sellers operate without identity verification, making it impossible for buyers to distinguish legitimate vendors from bad actors.',
+      'Many sellers and service providers operate without identity verification, making it difficult for customers to distinguish legitimate businesses from bad actors.',
   },
   {
     icon: 'gavel',
-    title: 'No Escrow Infrastructure',
+    title: 'No Trusted Payment Protection',
     description:
-      'Africa’s fastest-growing digital economy runs on mobile money, yet lacks the escrow and dispute-resolution layer that institutional investors and consumers demand.',
+      'Without a trusted escrow system, buyers risk losing their money, while honest sellers risk completing work without guaranteed payment.',
   },
 ];
 
 export const steps: Step[] = [
   {
     num: '01',
-    title: 'Discover Verified Vendors',
+    title: 'Browse or Request Bids',
     description:
-      'Browse escrow-protected listings from verified African vendors — building materials, food supply, home services, and more.',
+      'Explore products from verified vendors, browse trusted professionals, or post your project to receive competitive bids from qualified businesses.',
+    iconName: 'step_discover',
   },
   {
     num: '02',
-    title: 'Order & Pay Securely',
+    title: 'Choose & Pay Securely',
     description:
-      'Complete your purchase via mobile money or local payment rails. Funds are never released directly to the seller.',
+      "Pay securely through Zantrra's escrow system. The buyer instantly receives a unique 6-digit confirmation code used to release payment after delivery or service completion.",
+    iconName: 'step_pay',
   },
   {
     num: '03',
-    title: 'Escrow Vault Activates',
+    title: 'Payment Secured in Escrow',
     description:
-      'Payment is locked in Zantrra’s escrow vault — fully protected in GNF until delivery is independently confirmed.',
+      'The seller delivers the product or completes the requested service while your payment remains safely protected in escrow.',
+    iconName: 'step_escrow',
   },
   {
     num: '04',
-    title: '6-Digit Code Issued',
+    title: 'Delivery or Service Completion',
     description:
-      'A unique completion code is generated for the buyer and held privately until goods or services are verified.',
+      'Once buyer satisfied, buyer share secure 6-digit confirmation code to seller or service provider. Zantrra instantly releases the payment to the seller in local curency.',
+    iconName: 'step_code',
   },
   {
     num: '05',
-    title: 'Confirm & Release',
+    title: 'Confirm & Release Payment',
     description:
-      'Once satisfied with delivery, the buyer shares the code — triggering instant, auditable payment release to the vendor.',
+      'Both parties receive a digital receipt, leave reviews, and strengthen their reputation making every completed transaction safer for the entire community.',
+    iconName: 'step_confirm',
   },
   {
     num: '06',
-    title: 'Receipt & Reputation',
+    title: 'Rate, Review & Build Trust',
     description:
-      'Both parties receive a verified transaction receipt. Vendor trust scores update in real time for future buyers.',
+      'Every transaction follows a simple six-step process that protects both buyers and sellers from payment to completion.',
+    iconName: 'step_receipt',
   },
-];
-
-export const demoContent: Record<'buyer' | 'seller', DemoTabContent> = {
+];export const demoContent: Record<'buyer' | 'seller', DemoTabContent> = {
   buyer: {
     icon: 'shopping_cart',
     title: 'Buy with confidence in Guinea',
@@ -200,47 +207,46 @@ export const features: Feature[] = [
   {
     icon: 'shield_lock',
     iconBg: 'bg-[#eef2ff]',
-    title: 'Escrow-First Architecture',
+    title: 'Secure Escrow Protection',
     description:
-      'Purpose-built trust infrastructure for peer-to-peer commerce — every transaction secured in a regulated escrow vault before release.',
+      'Every payment is securely held in escrow and released only after the buyer confirms that the product has been delivered or the service has been completed.',
   },
   {
     icon: 'pin',
     iconBg: 'bg-emerald-50',
-    title: '6-Digit Completion Code',
+    title: '6-Digit Confirmation Code',
     description:
-      'Cryptographic proof of delivery ensures funds move only when the buyer explicitly authorizes release — eliminating premature payouts.',
+      "Every transaction generates a unique 6-digit code, ensuring payment is released only with the buyer's authorization after successful completion.",
   },
   {
     icon: 'gavel',
     iconBg: 'bg-orange-50',
-    title: 'Service Bidding Marketplace',
+    title: 'Competitive Service Bidding',
     description:
-      'Post procurement requests for painting, construction, and logistics — receive competitive bids from verified vendors across Guinea.',
+      'Post your project and receive competitive bids from verified professionals, making it easy to compare pricing, experience, and reviews before choosing.',
   },
   {
     icon: 'account_balance_wallet',
     iconBg: 'bg-fuchsia-50',
-    title: 'Mobile Money & GNF Wallet',
+    title: 'Flexible Payment Options',
     description:
-      'Native integration with Orange Money, MTN MoMo, and local bank rails — deposit, hold, and withdraw in Guinean Francs with minimal friction.',
+      "Pay securely using Mobile Money, debit cards, bank transfers, or other supported payment methods all processed through Zantrra's protected escrow system.",
   },
   {
     icon: 'psychology',
     iconBg: 'bg-blue-50',
-    title: 'AI Trust & Fraud Engine',
+    title: 'Verified Businesses & Professionals',
     description:
-      'Machine-learning models analyze vendor behavior, transaction patterns, and identity signals to flag fraud before funds are at risk.',
+      'Every vendor and service provider goes through identity verification, helping buyers confidently choose trusted businesses.',
   },
   {
     icon: 'balance',
     iconBg: 'bg-rose-50',
-    title: 'Structured Dispute Resolution',
+    title: 'Fair Dispute Resolution',
     description:
-      'Evidence-based mediation with trained arbitrators — fair outcomes for buyers and sellers when delivery disputes arise.',
+      'if a disagreement occurs, Zantrra provides a structured dispute process to help resolve issues fairly and protect both buyers and sellers.',
   },
 ];
-
 export const aboutItems: AboutItem[] = [
   {
     icon: 'flag',
@@ -264,25 +270,140 @@ export const aboutItems: AboutItem[] = [
 
 export const stats: Stat[] = [
   {
-    value: '$40.5B',
-    label: 'Africa E-commerce Market',
-    sub: 'Projected size by 2025',
-  },
-  {
     value: '$56B',
-    label: 'Projected Market Size',
-    sub: 'CAGR 8.46% by 2029',
+    label: 'Africa E-commerce Market',
+    sub: 'By 2029 · CAGR 8.6%',
   },
   {
-    value: '1.4B+',
-    label: 'People in Africa',
-    sub: 'Rapid digital adoption',
+    value: '1.5B+',
+    label: 'Population',
+    sub: "World's youngest continent",
   },
   {
-    value: '60%+',
-    label: 'Mobile Transactions',
-    sub: 'Mobile money dominant',
+    value: '751M',
+    label: 'Mobile Internet Users',
+    sub: 'Projected by 2030',
   },
+  {
+    value: '518M',
+    label: 'Unique Mobile Subscribers',
+    sub: 'Projected by 2030',
+  },
+  {
+    value: '$290B',
+    label: 'Mobile Economy Contribution',
+    sub: 'To GDP by 2030',
+  },
+];
+
+export interface MarketListItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export const whyAfricaItems: MarketListItem[] = [
+  {
+    icon: 'shopping_cart',
+    title: 'Massive Consumer Economy',
+    description: 'Spending projected to reach $2.5 trillion by 2030.',
+  },
+  {
+    icon: 'pin',
+    title: 'Growing Digital Adoption',
+    description: 'Mobile money and internet access driving a revolution.',
+  },
+  {
+    icon: 'groups',
+    title: 'Young & Urban Population',
+    description: "60% of Africa's population is under 25.",
+  },
+  {
+    icon: 'rocket_launch',
+    title: 'Entrepreneurship & SMEs',
+    description: 'Millions of independent sellers coming online yearly.',
+  },
+  {
+    icon: 'public',
+    title: 'Cross-Border Integration',
+    description: 'The AfCFTA is unlocking a single digital market.',
+  },
+];
+
+export const whyNowItems: MarketListItem[] = [
+  {
+    icon: 'pin',
+    title: 'Growing Mobile Connectivity',
+    description: '751 million mobile internet users projected by 2030.',
+  },
+  {
+    icon: 'warning',
+    title: 'Trust Gap',
+    description: 'Fraud, scams, and payment uncertainty remain major barriers.',
+  },
+  {
+    icon: 'payments',
+    title: 'Expanding Digital Payments',
+    description: 'Mobile technologies expected to contribute $290B to the economy by 2030.',
+  },
+  {
+    icon: 'public',
+    title: 'Cross-Border Opportunity',
+    description: 'AfCFTA creating a single market for 1.3B+ people.',
+  },
+];
+
+export const targetMarkets: MarketListItem[] = [
+  {
+    icon: 'shopping_cart',
+    title: 'Goods Marketplace',
+    description: 'Construction materials, electronics, fashion, retail, home & living, and more.',
+  },
+  {
+    icon: 'hub',
+    title: 'Local Services',
+    description: 'Electricians, plumbers, cleaning, repairs, transportation, and more.',
+  },
+  {
+    icon: 'package',
+    title: 'Wholesale & B2B Trade',
+    description: 'Agriculture, food supplies, industrial goods, building materials, and more.',
+  },
+  {
+    icon: 'public',
+    title: 'Cross-Border Trade',
+    description: 'Regional buyers & sellers, imports, exports, and international SMEs.',
+  },
+];
+
+export const marketGapItems: string[] = [
+  'Fraud and scams in peer-to-peer transactions.',
+  'Lack of secure payment and escrow protection.',
+  'Low trust between buyers and sellers.',
+  'Limited buyer protection and dispute resolution.',
+  "Fragmented solutions that don't work across Africa.",
+];
+
+export const whyZantrraItems: MarketListItem[] = [
+  { icon: 'shield_lock', title: 'Secure Escrow', description: '' },
+  { icon: 'verified_user', title: 'Verified Users', description: '' },
+  { icon: 'pin', title: '6-Digit Security Code', description: '' },
+  { icon: 'payments', title: 'Mobile Money Integration', description: '' },
+  { icon: 'public', title: 'Local & Cross-Border Payments', description: '' },
+  { icon: 'balance', title: 'Dispute Resolution', description: '' },
+  { icon: 'favorite', title: 'Reputation & Trust Scores', description: '' },
+];
+
+export const economyStats: Stat[] = [
+  { value: '$3.2T', label: 'Africa GDP', sub: '2024' },
+  { value: '$2.5T', label: 'Consumer Spending', sub: 'By 2030 · cash, cards & mobile money' },
+  { value: '$56B', label: 'E-commerce Market', sub: 'By 2029' },
+];
+
+export const mobileInternetGrowth = [
+  { year: '2023', value: '320M', pct: 43 },
+  { year: '2025', value: '416M', pct: 55 },
+  { year: '2030', value: '751M', pct: 100 },
 ];
 
 export const roadmapItems: RoadmapItem[] = [

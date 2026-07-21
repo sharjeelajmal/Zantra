@@ -62,8 +62,8 @@ function EscrowStatusCard() {
         >
           <div className="mb-4 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2.5">
-              <IconBox size="sm">
-                <Icon name="shield_lock" />
+            <IconBox size="sm" className="!size-11 !rounded-xl bg-transparent ring-0 shadow-none">
+                <Icon name="shield_lock" className="size-9 drop-shadow-[0_6px_12px_rgba(15,23,42,0.16)]" />
               </IconBox>
               <div className="min-w-0">
                 <p className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Escrow Active</p>
@@ -156,7 +156,7 @@ function SecretCodeDisplay() {
         transition={{ delay: 0.6, duration: 0.3 }}
         className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-primary/5 px-3 py-2.5 text-xs font-semibold text-primary ring-1 ring-primary/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]"
       >
-        <Icon name="pin" className="size-3.5" />
+        <Icon name="pin" className="size-5 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
         {copied ? 'Copied!' : 'Copy Code'}
       </motion.button>
     </motion.div>
@@ -225,7 +225,7 @@ function ProcessingOverlay({ message }: { message: string }) {
           animate={{ rotate: 360 }}
           transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
         >
-          <Icon name="hub" className="size-10 text-primary" />
+          <Icon name="hub" className="size-14 drop-shadow-[0_8px_16px_rgba(15,23,42,0.18)]" />
         </motion.div>
         <p className="text-sm font-semibold text-primary">{message}</p>
       </div>
@@ -259,8 +259,8 @@ function IdleChoiceGrid({
       >
         <div className="relative flex h-full w-full flex-col rounded-2xl bg-white/90 p-5 ring-1 ring-white/80 backdrop-blur-xl">
           <div className="mb-4 flex items-start justify-between gap-2">
-            <IconBox size="md" className="bg-gradient-to-br from-[#eef2ff] to-primary-fixed/40 ring-primary/10">
-              <Icon name="shopping_cart" className="size-6" />
+            <IconBox size="md" className="!size-16 !rounded-2xl bg-transparent ring-0 shadow-none">
+              <Icon name="shopping_cart" className="size-12 drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)]" />
             </IconBox>
             <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
               Fixed Price
@@ -293,8 +293,8 @@ function IdleChoiceGrid({
       >
         <div className="relative flex h-full w-full flex-col rounded-2xl bg-white/90 p-5 ring-1 ring-white/80 backdrop-blur-xl">
           <div className="mb-4 flex items-start justify-between gap-2">
-            <IconBox size="md" className="bg-gradient-to-br from-violet-50 to-violet-100 ring-violet-500/15">
-              <Icon name="gavel" className="size-6 text-violet-600" />
+            <IconBox size="md" className="!size-16 !rounded-2xl bg-transparent ring-0 shadow-none">
+              <Icon name="gavel" className="size-12 drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)]" />
             </IconBox>
             <span className="rounded-full bg-violet-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-violet-700">
               Service Bidding
@@ -347,7 +347,7 @@ function BidCard({
           <p className="mt-1 whitespace-nowrap text-base font-black text-primary">{vendor.price}</p>
         </div>
         <Button onClick={onAccept} disabled={disabled} className="w-full shrink-0 sm:w-auto">
-          <Icon name="task_alt" className="size-4" />
+          <Icon name="task_alt" className="size-5 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
           Accept Bid
         </Button>
       </div>
@@ -370,9 +370,9 @@ function BiddingList({
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="mx-auto mb-3 flex size-10 items-center justify-center rounded-xl bg-violet-50 ring-1 ring-violet-500/15"
+          className="mx-auto mb-3 flex size-14 items-center justify-center rounded-2xl bg-transparent"
         >
-          <Icon name="gavel" className="size-5 text-violet-600" />
+          <Icon name="gavel" className="size-12 drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)]" />
         </motion.div>
         <h3 className="mb-1 font-headline-md text-headline-md text-on-background">Incoming Bids</h3>
         <p className="text-xs text-slate-500">Compare offers from verified Guinea vendors</p>
@@ -438,7 +438,7 @@ export function DemoBuyerTab() {
               className="relative flex size-20 items-center justify-center rounded-2xl bg-emerald-50 ring-2 ring-emerald-400/40"
               style={{ boxShadow: '0 0 40px -4px rgba(52, 211, 153, 0.55)' }}
             >
-              <Icon name="verified" className="size-9 text-emerald-600" />
+              <Icon name="verified" className="size-14 drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)]" />
             </motion.div>
             <div className="max-w-sm text-center">
               <h3 className="mb-2 font-headline-md text-headline-md text-on-background">Payment Released</h3>
@@ -502,7 +502,7 @@ export function DemoBuyerTab() {
                   disabled={isProcessing || enteredCode.length !== 6}
                   className="w-full justify-center py-3.5"
                 >
-                  <Icon name="account_balance_wallet" className="size-5" />
+                  <Icon name="account_balance_wallet" className="size-6 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
                   Release Funds
                 </Button>
               </div>

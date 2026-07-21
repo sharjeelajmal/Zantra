@@ -19,14 +19,12 @@ export function ProblemSection() {
               The Problem
             </span>
             <h2 className="mb-3 max-w-xl text-balance text-[2rem] font-extrabold leading-[1.08] tracking-tighter text-on-background sm:text-[2.5rem] md:text-[2.75rem]">
-              Online commerce is{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-violet-600 to-indigo-500">
-                broken.
-              </span>
+              Where Commerce Meets Trust.
             </h2>
             <p className="max-w-lg text-balance text-base leading-relaxed text-slate-600 md:text-lg">
-              Scams, unreliable sellers, failed payments, and lack of trust make online transactions risky for
-              everyone involved — especially across Africa&apos;s mobile-money economy.
+              Every day, buyers and sellers face unnecessary risk. Buyers worry about paying for products or services
+              they may never receive, while honest sellers fear completing work without guaranteed payment. Without
+              trust, commerce slows, disputes increase, and opportunities are lost.
             </p>
           </div>
 

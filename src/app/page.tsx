@@ -7,7 +7,6 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
 import { MarketSection } from '@/components/sections/MarketSection';
 import { ProblemSection } from '@/components/sections/ProblemSection';
-import { RoadmapSection } from '@/components/sections/RoadmapSection';
 import { Footer } from '@/components/layout/Footer';
 import { Navbar } from '@/components/layout/Navbar';
 
@@ -23,7 +22,6 @@ export default function Home() {
         <FeaturesSection />
         <AboutSection />
         <MarketSection />
-        <RoadmapSection />
         <FAQSection />
         <CTASection />
       </main>

@@ -1,5 +1,6 @@
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { Icon } from '@/components/ui/Icon';
+import { IconBox } from '@/components/ui/IconBox';
 import { SectionEyebrow } from '@/components/ui/SectionEyebrow';
 import { steps } from '@/lib/content';
 import { cn, oddGridLastSpan } from '@/lib/utils';
@@ -22,7 +23,7 @@ export function HowItWorksSection() {
         </p>
 
         <div className="relative [perspective:1200px]">
-          <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent lg:block" />
+          <div className="absolute left-0 right-0 top-14 hidden h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent lg:block" />
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-6 lg:gap-4">
             {steps.map((step, i) => (
               <div
@@ -33,9 +34,19 @@ export function HowItWorksSection() {
                 )}
               >
                 <div className="relative mb-3 md:mb-4">
-                  <div className="flex size-11 items-center justify-center rounded-full bg-primary text-xs font-bold text-white shadow-[0_12px_28px_-8px_rgba(70,72,212,0.55)] ring-4 ring-primary/10 transition-transform duration-300 group-hover:scale-105 md:size-16 md:text-sm">
+                  <IconBox
+                    size="lg"
+                    className="mx-auto !size-16 !rounded-2xl transition-transform duration-300 group-hover:scale-105 md:!size-[4.5rem]"
+                  >
+                    <Icon
+                      name={step.iconName}
+                      alt={step.title}
+                      className="size-11 object-contain drop-shadow-[0_8px_16px_rgba(15,23,42,0.16)] md:size-14"
+                    />
+                  </IconBox>
+                  <span className="absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white shadow-[0_8px_16px_-4px_rgba(70,72,212,0.5)] ring-2 ring-white md:size-7 md:text-[11px]">
                     {step.num}
-                  </div>
+                  </span>
                   {i < steps.length - 1 && (
                     <Icon
                       name="arrow_forward"
@@ -43,7 +54,9 @@ export function HowItWorksSection() {
                     />
                   )}
                 </div>
-                <h3 className="mb-1 text-xs font-label-md font-bold text-on-background md:mb-2 md:text-label-md">{step.title}</h3>
+                <h3 className="mb-1 text-xs font-label-md font-bold text-on-background md:mb-2 md:text-label-md">
+                  {step.title}
+                </h3>
                 <p className="text-[10px] leading-relaxed text-slate-600 md:text-xs">{step.description}</p>
               </div>
             ))}

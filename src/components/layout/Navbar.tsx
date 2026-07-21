@@ -16,6 +16,8 @@ const NAV_ICONS: Record<string, IconName> = {
   'How it Works': 'cursor_click',
   Features: 'shield_lock',
   About: 'groups',
+  Market: 'public',
+  'Market Opportunity': 'public',
   FAQ: 'visibility',
 };
 

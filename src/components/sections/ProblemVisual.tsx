@@ -31,21 +31,15 @@ export function ProblemVisual() {
       <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(129,140,248,0.12)_0%,transparent_68%)]" />
 
       <Float delay={0} y={8} className="absolute left-[8%] top-[12%]">
-        <div className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-200 to-indigo-300 shadow-[0_16px_32px_-8px_rgba(99,102,241,0.35),inset_0_2px_0_rgba(255,255,255,0.7)] ring-1 ring-white/60">
-          <Icon name="warning" className="size-7 text-violet-700" />
-        </div>
+        <Icon name="warning" className="size-12" />
       </Float>
 
       <Float delay={0.6} y={12} className="absolute right-[6%] top-[18%]">
-        <div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-sky-100 to-blue-200 shadow-[0_12px_28px_-8px_rgba(59,130,246,0.3),inset_0_2px_0_rgba(255,255,255,0.8)] ring-1 ring-white/70">
-          <Icon name="payments" className="size-6 text-blue-600" />
-        </div>
+        <Icon name="payments" className="size-11" />
       </Float>
 
       <Float delay={1.2} y={9} className="absolute bottom-[22%] left-[4%]">
-        <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-rose-100 to-red-200 shadow-[0_12px_24px_-8px_rgba(239,68,68,0.28),inset_0_2px_0_rgba(255,255,255,0.75)] ring-1 ring-white/60">
-          <Icon name="no_accounts" className="size-5 text-rose-600" />
-        </div>
+        <Icon name="no_accounts" className="size-10" />
       </Float>
 
       <motion.div
@@ -83,9 +77,7 @@ export function ProblemVisual() {
       </motion.div>
 
       <Float delay={0.3} y={7} className="absolute bottom-[10%] right-[12%]">
-        <div className="flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-100 to-teal-200 shadow-lg ring-2 ring-white">
-          <Icon name="gavel" className="size-4 text-teal-700" />
-        </div>
+        <Icon name="gavel" className="size-9" />
       </Float>
     </div>
   );

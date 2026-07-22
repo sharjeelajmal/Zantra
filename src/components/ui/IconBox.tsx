@@ -13,12 +13,13 @@ const sizeClasses = {
   lg: 'size-12 rounded-2xl',
 };
 
+/** Transparent frame for 3D PNG icons — no clip, no flat fill */
 export function IconBox({ children, className, size = 'md' }: IconBoxProps) {
   return (
     <div
       className={cn(
-        'inline-flex items-center justify-center overflow-hidden',
-        'bg-white/80 backdrop-blur-sm shadow-sm ring-1 ring-slate-900/5',
+        'inline-flex items-center justify-center overflow-visible',
+        'bg-transparent',
         sizeClasses[size],
         className,
       )}

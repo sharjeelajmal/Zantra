@@ -65,14 +65,14 @@ const ICON_FILE: Record<string, string> = {
   escrow_vault: 'Secure bank.png',
   step_confirm: 'Cardboard delivery.png',
   package: 'Cardboard delivery.png',
-  step_code: 'phonemobile.png',
-  enter_code: 'phonemobile.png',
+  step_code: 'mobilephone.png',
+  enter_code: 'mobilephone.png',
   step_receipt: '(GNF) currency.png',
   banknote: '(GNF) currency.png',
 
   // Feature / marketing keys
   shield_lock: 'Secure bank.png',
-  pin: 'phonemobile.png',
+  pin: 'mobilephone.png',
   gavel: 'Legal court judge gavel.png',
   account_balance_wallet: 'Wallet.png',
   verified_user: 'Shield with a checkmark.png',
@@ -90,7 +90,7 @@ const ICON_FILE: Record<string, string> = {
   flag: 'Five-star rating.png',
   visibility: 'Magnifying glass.png',
   favorite: 'Five-star rating.png',
-  mail: 'phonemobile.png',
+  mail: 'mobilephone.png',
   public: 'Secure bank.png',
   groups: 'Handshake.png',
   share: 'Handshake.png',
@@ -203,7 +203,12 @@ export function Icon({
       src={src}
       alt={alt}
       draggable={false}
-      className={cn('shrink-0 object-contain', className)}
+      className={cn(
+        'shrink-0 object-contain',
+        // Soft depth so 3D PNGs read as objects, not flat glyphs
+        'drop-shadow-[0_6px_14px_rgba(15,23,42,0.16)]',
+        className,
+      )}
       {...props}
     />
   );

@@ -32,8 +32,8 @@ export function CTASection() {
               className="pointer-events-none absolute z-20 hidden items-center gap-2 rounded-2xl bg-white/70 px-3 py-2 text-[11px] font-semibold text-slate-700 shadow-[0_12px_32px_-12px_rgba(70,72,212,0.25)] ring-1 ring-white/80 backdrop-blur-xl lg:flex"
               style={{ left: badge.x, top: badge.y, transform: 'translateZ(40px)' }}
             >
-              <span className="flex size-7 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <Icon name={badge.icon} className="size-4" />
+              <span className="flex size-6 items-center justify-center">
+                <Icon name={badge.icon} className="size-5" />
               </span>
               {badge.label}
             </motion.div>
@@ -68,7 +68,7 @@ export function CTASection() {
                     transform: 'translateZ(24px)',
                   }}
                 >
-                  <Icon name="rocket_launch" className="size-9 text-white" />
+                  <Icon name="rocket_launch" className="size-11" />
                 </div>
               </motion.div>
 
@@ -104,7 +104,7 @@ export function CTASection() {
                       type="submit"
                       className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-primary shadow-[0_12px_32px_-8px_rgba(0,0,0,0.35)] transition-all hover:bg-white/95 hover:shadow-[0_16px_40px_-8px_rgba(0,0,0,0.4)] md:py-4"
                     >
-                      <Icon name="mail" className="size-4" />
+                      <Icon name="mail" className="size-5" />
                       Join Waitlist
                     </button>
                   </div>
@@ -115,7 +115,7 @@ export function CTASection() {
                 <p className="text-xs leading-relaxed text-[#a3b3ff]">No spam, ever. Unsubscribe any time.</p>
                 <span className="hidden h-3 w-px bg-white/20 sm:block" aria-hidden />
                 <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white/80">
-                  <Icon name="verified" className="size-3.5 text-emerald-300" />
+                  <Icon name="verified" className="size-4" />
                   Early access guaranteed
                 </span>
               </div>

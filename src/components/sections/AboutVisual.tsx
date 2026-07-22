@@ -30,8 +30,8 @@ export function AboutVisual() {
       <FloatingElement delay={0} className="absolute left-1/2 top-4 z-10 -translate-x-1/2">
         <MicroCard className="px-4 py-3">
           <div className="flex items-center gap-2">
-            <IconBox size="sm">
-              <Icon name="hub" />
+            <IconBox size="sm" className="!size-7 shrink-0">
+              <Icon name="hub" className="size-5" />
             </IconBox>
             <div className="min-w-0">
               <p className="whitespace-nowrap text-xs font-semibold text-slate-900">African Trust Network</p>

@@ -71,7 +71,7 @@ export function HeroSection() {
             <div className="flex flex-wrap gap-6">
               {heroTrustBadges.map((item) => (
                 <div key={item.label} className="flex items-center gap-2 text-sm text-slate-500">
-                  <Icon name={item.icon} className="size-4 text-primary" />
+                  <Icon name={item.icon} className="size-5" />
                   {item.label}
                 </div>
               ))}

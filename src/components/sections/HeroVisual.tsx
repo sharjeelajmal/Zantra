@@ -45,7 +45,7 @@ export function HeroVisual() {
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2.5">
                 <IconBox size="sm" className="shrink-0">
-                  <Icon name="shield_lock" />
+                  <Icon name="shield_lock" className="size-5" />
                 </IconBox>
                 <div className="min-w-0">
                   <p className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Escrow Locked</p>
@@ -111,8 +111,8 @@ export function HeroVisual() {
 
       <FloatingElement delay={1.4} duration={4.8} className="absolute bottom-4 left-4 z-20">
         <MicroCard className="flex items-center gap-2 px-3 py-2">
-          <IconBox size="sm" className="bg-emerald-500/5 text-emerald-600 ring-emerald-500/15">
-            <Icon name="verified" className="size-3.5" />
+          <IconBox size="sm" className="!size-7">
+            <Icon name="verified" className="size-5" />
           </IconBox>
           <span className="whitespace-nowrap text-[10px] font-semibold text-slate-800 sm:text-xs">Vendor Verified</span>
         </MicroCard>
@@ -120,7 +120,7 @@ export function HeroVisual() {
 
       <FloatingElement delay={2} duration={5.2} className="absolute bottom-10 right-2 z-20">
         <MicroCard className="flex items-center gap-2.5 px-3 py-2.5">
-          <Icon name="account_balance_wallet" className="size-4 shrink-0 text-primary" />
+          <Icon name="account_balance_wallet" className="size-6 shrink-0" />
           <div className="min-w-0">
             <p className="text-[10px] leading-none text-slate-400">Funds Held</p>
             <p className="truncate whitespace-nowrap text-[10px] font-bold text-slate-900 sm:text-xs">

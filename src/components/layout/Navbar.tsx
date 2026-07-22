@@ -201,7 +201,7 @@ export function Navbar() {
                   </div>
 
                   <div className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-slate-50/80 px-3 py-2.5 ring-1 ring-slate-900/[0.04]">
-                    <Icon name="shield_lock" className="size-3.5 text-primary" />
+                    <Icon name="shield_lock" className="size-4" />
                     <p className="text-[11px] font-medium text-slate-500">Escrow-protected commerce</p>
                   </div>
                 </div>

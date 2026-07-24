@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { demoVendors, type DemoVendor } from '@/lib/content';
 
-export type EscrowStep = 'idle' | 'bidding' | 'locked' | 'delivered' | 'released';
+export type EscrowStep = 'idle' | 'bidding' | 'locked' | 'delivered' | 'released' | 'withdrawn';
 
 const DEFAULT_VENDOR = demoVendors[0];
 const INVALID_CODE_MESSAGE = 'Invalid completion code. Please try again.';
@@ -32,6 +32,7 @@ interface EscrowState {
   placeOrder: (vendor: DemoVendor) => void;
   markDelivered: () => void;
   releaseFunds: (enteredCode: string) => void;
+  withdrawFunds: (method: string) => void;
   clearError: () => void;
   reset: () => void;
 }
@@ -90,6 +91,16 @@ export const useEscrowStore = create<EscrowState>((set, get) => ({
     }
 
     set({ error: INVALID_CODE_MESSAGE });
+  },
+
+  withdrawFunds: (method) => {
+    const { step, isProcessing } = get();
+    if (step !== 'released' || isProcessing || !method) return;
+
+    set({ isProcessing: true, error: null });
+    setTimeout(() => {
+      set({ step: 'withdrawn', isProcessing: false, error: null });
+    }, PROCESSING_DELAY_MS);
   },
 
   clearError: () => set({ error: null }),

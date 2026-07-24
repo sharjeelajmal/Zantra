@@ -7,7 +7,7 @@ import { Icon } from '@/components/ui/Icon';
 import { IconBox } from '@/components/ui/IconBox';
 import { demoVendors, type DemoVendor } from '@/lib/content';
 import { useEscrowStore } from '@/lib/store/useEscrowStore';
-import { cn } from '@/lib/utils';
+import { cn, parseGnfAndCalculateFees } from '@/lib/utils';
 
 const DIRECT_VENDOR = demoVendors[0];
 
@@ -38,6 +38,7 @@ const bidItemVariants = {
 
 function EscrowStatusCard() {
   const { activeVendor, step } = useEscrowStore();
+  const fees = parseGnfAndCalculateFees(activeVendor.price);
 
   return (
     <motion.div
@@ -62,12 +63,12 @@ function EscrowStatusCard() {
         >
           <div className="mb-4 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2.5">
-            <IconBox size="sm" className="!size-11 !rounded-xl bg-transparent ring-0 shadow-none">
+              <IconBox size="sm" className="!size-11 !rounded-xl bg-transparent ring-0 shadow-none">
                 <Icon name="shield_lock" className="size-9 drop-shadow-[0_6px_12px_rgba(15,23,42,0.16)]" />
               </IconBox>
               <div className="min-w-0">
                 <p className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Escrow Active</p>
-                <p className="truncate whitespace-nowrap text-xs font-semibold text-slate-900">{activeVendor.price}</p>
+                <p className="truncate whitespace-nowrap text-xs font-semibold text-slate-900">{fees.buyerTotal}</p>
               </div>
             </div>
             <motion.span
@@ -96,8 +97,28 @@ function EscrowStatusCard() {
                   step === 'delivered' ? 'text-amber-600' : 'text-primary',
                 )}
               >
-                {step === 'delivered' ? 'Awaiting Code Release' : 'Awaiting Delivery'}
+                {step === 'delivered' ? 'Awaiting Seller Code Entry' : 'Awaiting Delivery'}
               </span>
+            </div>
+          </div>
+
+          <div className="mt-4 rounded-xl bg-slate-50/90 p-3.5 ring-1 ring-slate-900/5">
+            <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">
+              Transaction Breakdown
+            </p>
+            <div className="space-y-2">
+              <div className="flex justify-between gap-2 text-xs">
+                <span className="text-slate-500">Base Price</span>
+                <span className="whitespace-nowrap font-medium text-slate-900">{fees.baseAmount}</span>
+              </div>
+              <div className="flex justify-between gap-2 text-xs">
+                <span className="text-slate-500">Platform Fee (2%)</span>
+                <span className="whitespace-nowrap font-medium text-amber-700">+{fees.platformFee}</span>
+              </div>
+              <div className="flex justify-between gap-2 border-t border-slate-200/80 pt-2 text-xs">
+                <span className="font-semibold text-slate-700">Total Paid</span>
+                <span className="whitespace-nowrap font-bold text-primary">{fees.buyerTotal}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -128,8 +149,8 @@ function SecretCodeDisplay() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
     >
-      <p className="mb-3 text-center text-xs font-medium text-slate-500">
-        Your private 6-digit completion code
+      <p className="mb-3 text-center text-xs font-medium leading-relaxed text-slate-500">
+        Share this code with the seller ONLY after you receive the product/service.
       </p>
       <div className="grid grid-cols-6 gap-1.5">
         {digits.map((digit, i) => (
@@ -154,61 +175,12 @@ function SecretCodeDisplay() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.3 }}
-        className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-primary/5 px-3 py-2.5 text-xs font-semibold text-primary ring-1 ring-primary/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]"
+        className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-primary/5 px-3 py-2.5 text-xs font-semibold text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] ring-1 ring-primary/10"
       >
         <Icon name="pin" className="size-5 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
         {copied ? 'Copied!' : 'Copy Code'}
       </motion.button>
     </motion.div>
-  );
-}
-
-function PinPadInput({
-  value,
-  onChange,
-  error,
-  disabled,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-  error: string | null;
-  disabled?: boolean;
-}) {
-  const digits = value.padEnd(6, ' ').split('').slice(0, 6);
-
-  return (
-    <div className={cn('relative space-y-2', disabled && 'pointer-events-none opacity-60')}>
-      <div className="grid grid-cols-6 gap-2">
-        {digits.map((d, i) => (
-          <div
-            key={i}
-            className={cn(
-              'flex h-12 items-center justify-center rounded-xl text-xl font-bold transition-all duration-200',
-              d.trim()
-                ? 'bg-primary/5 text-primary shadow-[0_4px_12px_-4px_rgba(70,72,212,0.25)] ring-2 ring-primary/20'
-                : 'bg-white text-slate-300 shadow-[inset_0_2px_6px_rgba(15,23,42,0.06)] ring-1 ring-slate-200/80',
-              error && 'ring-error/40',
-            )}
-          >
-            {d.trim() || '·'}
-          </div>
-        ))}
-      </div>
-      <label htmlFor="completion-code" className="sr-only">
-        Enter 6-digit completion code
-      </label>
-      <input
-        id="completion-code"
-        type="text"
-        inputMode="numeric"
-        maxLength={6}
-        value={value}
-        onChange={(e) => onChange(e.target.value.replace(/\D/g, '').slice(0, 6))}
-        aria-invalid={Boolean(error)}
-        className="absolute inset-0 cursor-pointer opacity-0"
-      />
-      <p className="text-center text-[10px] font-medium text-slate-400">Tap digits to enter code</p>
-    </div>
   );
 }
 
@@ -396,30 +368,19 @@ export function DemoBuyerTab() {
     step,
     bids,
     activeVendor,
-    error,
     isProcessing,
     startBidding,
     acceptBid,
     placeOrder,
-    releaseFunds,
     reset,
-    clearError,
   } = useEscrowStore();
-  const [enteredCode, setEnteredCode] = useState('');
 
-  const handleRelease = () => {
-    releaseFunds(enteredCode);
-  };
-
-  const handleReset = () => {
-    reset();
-    setEnteredCode('');
-  };
+  const fees = parseGnfAndCalculateFees(activeVendor.price);
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        key={step}
+        key={step === 'withdrawn' ? 'released' : step}
         {...stepTransition}
         className="relative flex min-h-[360px] w-full flex-col items-center gap-6 py-4 [perspective:1000px]"
         style={{ transformStyle: 'preserve-3d' }}
@@ -429,7 +390,8 @@ export function DemoBuyerTab() {
             <ProcessingOverlay message="Securing funds in Vault..." />
           )}
         </AnimatePresence>
-        {step === 'released' && (
+
+        {(step === 'released' || step === 'withdrawn') && (
           <>
             <motion.div
               initial={{ scale: 0.6, rotateY: -90 }}
@@ -443,11 +405,11 @@ export function DemoBuyerTab() {
             <div className="max-w-sm text-center">
               <h3 className="mb-2 font-headline-md text-headline-md text-on-background">Payment Released</h3>
               <p className="text-sm leading-relaxed text-slate-600">
-                <span className="whitespace-nowrap font-semibold text-primary">{activeVendor.price}</span> released
-                to {activeVendor.name}.
+                Escrow settled. Seller received{' '}
+                <span className="whitespace-nowrap font-semibold text-primary">{fees.sellerNet}</span> after fees.
               </p>
             </div>
-            <Button variant="outline" onClick={handleReset}>
+            <Button variant="outline" onClick={reset}>
               Start New Demo
             </Button>
           </>
@@ -468,48 +430,15 @@ export function DemoBuyerTab() {
         {(step === 'locked' || step === 'delivered') && (
           <>
             <EscrowStatusCard />
-            {step === 'locked' && <SecretCodeDisplay />}
-            {step === 'delivered' && (
-              <div className="w-full max-w-md space-y-4">
-                <p className="text-center text-xs font-medium text-slate-600">
-                  Enter your 6-digit completion code to release funds
-                </p>
-                <motion.div
-                  animate={error ? { x: [-10, 10, -10, 10, 0] } : { x: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <PinPadInput
-                    value={enteredCode}
-                    disabled={isProcessing}
-                    onChange={(v) => {
-                      setEnteredCode(v);
-                      if (error) clearError();
-                    }}
-                    error={error}
-                  />
-                </motion.div>
-                {error && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center text-xs text-error"
-                  >
-                    {error}
-                  </motion.p>
-                )}
-                <Button
-                  onClick={handleRelease}
-                  disabled={isProcessing || enteredCode.length !== 6}
-                  className="w-full justify-center py-3.5"
-                >
-                  <Icon name="account_balance_wallet" className="size-6 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
-                  Release Funds
-                </Button>
-              </div>
-            )}
+            <SecretCodeDisplay />
             {step === 'locked' && (
               <p className="max-w-sm text-center text-xs leading-relaxed text-slate-500">
                 Switch to <span className="font-semibold text-primary">Seller</span> → Mark as Delivered
+              </p>
+            )}
+            {step === 'delivered' && (
+              <p className="max-w-sm text-center text-xs leading-relaxed text-slate-500">
+                Share your code with the seller so they can release funds.
               </p>
             )}
           </>

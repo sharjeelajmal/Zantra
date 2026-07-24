@@ -9,3 +9,26 @@ export function oddGridLastSpan(index: number, total: number): string | undefine
   }
   return undefined;
 }
+
+function formatGnf(amount: number): string {
+  return `${amount.toLocaleString('en-US')} GNF`;
+}
+
+/** Parse a price like "95,000 GNF" and compute 2% platform fee totals. */
+export function parseGnfAndCalculateFees(priceString: string) {
+  const baseRaw = Number(priceString.replace(/[^\d]/g, '')) || 0;
+  const feeRaw = Math.round(baseRaw * 0.02);
+  const buyerTotalRaw = baseRaw + feeRaw;
+  const sellerNetRaw = baseRaw - feeRaw;
+
+  return {
+    baseAmount: formatGnf(baseRaw),
+    platformFee: formatGnf(feeRaw),
+    buyerTotal: formatGnf(buyerTotalRaw),
+    sellerNet: formatGnf(sellerNetRaw),
+    baseRaw,
+    feeRaw,
+    buyerTotalRaw,
+    sellerNetRaw,
+  };
+}

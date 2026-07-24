@@ -24,6 +24,7 @@ const PIPELINE: { key: EscrowStep; label: string; icon: IconName }[] = [
   { key: 'locked', label: 'Escrow', icon: 'shield_lock' },
   { key: 'delivered', label: 'Deliver', icon: 'package' },
   { key: 'released', label: 'Release', icon: 'banknote' },
+  { key: 'withdrawn', label: 'Withdraw', icon: 'account_balance_wallet' },
 ];
 
 const PIPELINE_INDEX: Record<EscrowStep, number> = {
@@ -32,6 +33,7 @@ const PIPELINE_INDEX: Record<EscrowStep, number> = {
   locked: 2,
   delivered: 3,
   released: 4,
+  withdrawn: 5,
 };
 
 function DemoStepPipeline() {

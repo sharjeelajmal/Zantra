@@ -11,6 +11,15 @@ import { cn, parseGnfAndCalculateFees } from '@/lib/utils';
 
 const DIRECT_VENDOR = demoVendors[0];
 
+type BuyerPhase = 'selection' | 'direct_search' | 'direct_catalog' | 'direct_checkout' | 'bidding_setup';
+
+const phaseTransition = {
+  initial: { opacity: 0, y: 16, scale: 0.97 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  exit: { opacity: 0, y: -12, scale: 0.98 },
+  transition: { duration: 0.35, ease: [0.25, 0.1, 0.25, 1] as const },
+};
+
 const stepTransition = {
   initial: { opacity: 0, y: 20, scale: 0.96, rotateX: 8 },
   animate: { opacity: 1, y: 0, scale: 1, rotateX: 0 },
@@ -35,6 +44,25 @@ const bidItemVariants = {
     transition: { type: 'spring' as const, stiffness: 320, damping: 24 },
   },
 };
+
+const CATALOG_ITEMS = [
+  { name: 'Cement (50kg Bag)', price: '95,000 GNF', highlight: true },
+  { name: 'Cement (25kg Bag)', price: '52,000 GNF', highlight: false },
+  { name: 'Sand (1 ton)', price: '180,000 GNF', highlight: false },
+];
+
+function PhaseBackButton({ onClick, label = 'Back' }: { onClick: () => void; label?: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 transition-colors hover:text-primary"
+    >
+      <Icon name="arrow_forward" className="size-3 rotate-180" />
+      {label}
+    </button>
+  );
+}
 
 function EscrowStatusCard() {
   const { activeVendor, step } = useEscrowStore();
@@ -215,7 +243,12 @@ function IdleChoiceGrid({
   disabled?: boolean;
 }) {
   return (
-    <div className="grid w-full max-w-2xl grid-cols-1 items-stretch gap-4 sm:grid-cols-2">
+    <motion.div
+      key="selection"
+      layoutId="buyer-phase-shell"
+      {...phaseTransition}
+      className="grid w-full max-w-2xl grid-cols-1 items-stretch gap-4 sm:grid-cols-2"
+    >
       <motion.button
         type="button"
         disabled={disabled}
@@ -240,7 +273,7 @@ function IdleChoiceGrid({
           </div>
           <h3 className="mb-1 font-headline-md text-headline-md text-on-background">Buy Direct</h3>
           <p className="mb-4 flex-1 text-xs leading-relaxed text-slate-500">
-            Skip bidding — lock escrow instantly at the listed price.
+            Search vendors, browse catalog, then lock escrow at the listed price.
           </p>
           <div className="mt-auto flex min-h-[5.5rem] flex-col justify-center rounded-xl bg-slate-50/80 p-3 ring-1 ring-slate-900/5">
             <p className="truncate text-sm font-semibold text-on-background">{DIRECT_VENDOR.product}</p>
@@ -274,7 +307,7 @@ function IdleChoiceGrid({
           </div>
           <h3 className="mb-1 font-headline-md text-headline-md text-on-background">Post Service Request</h3>
           <p className="mb-4 flex-1 text-xs leading-relaxed text-slate-500">
-            Receive competitive bids from verified Guinea vendors.
+            Set location, category, and budget — then receive competitive bids.
           </p>
           <div className="mt-auto flex min-h-[5.5rem] items-center gap-2 rounded-xl bg-violet-50/80 p-3 ring-1 ring-violet-500/10">
             <motion.span
@@ -286,7 +319,308 @@ function IdleChoiceGrid({
           </div>
         </div>
       </motion.button>
-    </div>
+    </motion.div>
+  );
+}
+
+function DirectSearchPhase({
+  onSelectVendor,
+  onBack,
+}: {
+  onSelectVendor: (vendor: DemoVendor) => void;
+  onBack: () => void;
+}) {
+  return (
+    <motion.div
+      key="direct_search"
+      layoutId="buyer-phase-shell"
+      {...phaseTransition}
+      className="w-full max-w-lg space-y-4"
+    >
+      <div className="flex items-center justify-between">
+        <PhaseBackButton onClick={onBack} />
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">Step 1 · Search</p>
+      </div>
+
+      <div className="rounded-2xl bg-white/90 p-4 shadow-[0_12px_32px_-16px_rgba(70,72,212,0.22)] ring-1 ring-slate-900/5 backdrop-blur-xl">
+        <label className="mb-2 block text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">
+          Search Location
+        </label>
+        <div className="flex items-center gap-2 rounded-xl bg-slate-50/90 px-3 py-3 ring-1 ring-slate-900/5">
+          <Icon name="search" className="size-5 shrink-0 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
+          <span className="text-sm font-semibold text-on-background">Conakry</span>
+          <motion.span
+            animate={{ opacity: [1, 0, 1] }}
+            transition={{ duration: 1.1, repeat: Infinity }}
+            className="ml-0.5 inline-block h-4 w-0.5 bg-primary"
+          />
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <p className="px-1 text-xs font-medium text-slate-500">Vendors near Conakry</p>
+        {demoVendors.map((vendor, i) => {
+          const isMike = vendor.name === DIRECT_VENDOR.name;
+          return (
+            <motion.button
+              key={vendor.name}
+              type="button"
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.08 }}
+              whileHover={{ y: -2, scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              onClick={() => {
+                if (isMike) onSelectVendor(vendor);
+              }}
+              className={cn(
+                'flex w-full items-center gap-3 rounded-2xl bg-white/90 px-4 py-3.5 text-left shadow-[0_8px_24px_-14px_rgba(70,72,212,0.2)] ring-1 ring-slate-900/5 backdrop-blur-xl transition-all',
+                isMike
+                  ? 'hover:ring-primary/25 hover:shadow-[0_12px_28px_-12px_rgba(70,72,212,0.28)]'
+                  : 'opacity-60',
+              )}
+            >
+              <IconBox size="sm" className="!size-11 shrink-0 bg-transparent ring-0 shadow-none">
+                <Icon
+                  name={isMike ? 'storefront' : 'shopping_cart'}
+                  className="size-8 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]"
+                />
+              </IconBox>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold text-on-background">{vendor.name}</p>
+                <p className="truncate text-xs text-slate-500">
+                  {vendor.category} · Conakry
+                </p>
+              </div>
+              {isMike ? (
+                <span className="shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary">
+                  Select
+                </span>
+              ) : (
+                <span className="shrink-0 text-[10px] font-medium text-slate-400">Nearby</span>
+              )}
+            </motion.button>
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+}
+
+function DirectCatalogPhase({
+  onSelectProduct,
+  onBack,
+}: {
+  onSelectProduct: () => void;
+  onBack: () => void;
+}) {
+  return (
+    <motion.div
+      key="direct_catalog"
+      layoutId="buyer-phase-shell"
+      {...phaseTransition}
+      className="w-full max-w-lg space-y-4"
+    >
+      <div className="flex items-center justify-between">
+        <PhaseBackButton onClick={onBack} />
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">Step 2 · Catalog</p>
+      </div>
+
+      <div className="rounded-2xl bg-white/90 p-5 shadow-[0_12px_32px_-16px_rgba(70,72,212,0.22)] ring-1 ring-slate-900/5 backdrop-blur-xl">
+        <div className="mb-4 flex items-center gap-3">
+          <IconBox size="md" className="!size-14 bg-transparent ring-0 shadow-none">
+            <Icon name="storefront" className="size-11 drop-shadow-[0_6px_12px_rgba(15,23,42,0.16)]" />
+          </IconBox>
+          <div className="min-w-0">
+            <p className="text-sm font-bold text-on-background">{DIRECT_VENDOR.name}</p>
+            <p className="text-xs text-slate-500">{DIRECT_VENDOR.category} · Conakry</p>
+          </div>
+          <span className="ml-auto flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-500/15">
+            <span className="size-1.5 rounded-full bg-emerald-400" />
+            Verified
+          </span>
+        </div>
+
+        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">Products</p>
+        <div className="space-y-2">
+          {CATALOG_ITEMS.map((item, i) => (
+            <motion.button
+              key={item.name}
+              type="button"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.07 }}
+              whileHover={item.highlight ? { y: -2 } : undefined}
+              whileTap={item.highlight ? { scale: 0.99 } : undefined}
+              disabled={!item.highlight}
+              onClick={() => {
+                if (item.highlight) onSelectProduct();
+              }}
+              className={cn(
+                'flex w-full items-center justify-between gap-3 rounded-xl px-3.5 py-3 text-left ring-1 backdrop-blur-sm transition-all',
+                item.highlight
+                  ? 'bg-primary/[0.06] ring-primary/20 shadow-[0_8px_20px_-12px_rgba(70,72,212,0.3)]'
+                  : 'bg-slate-50/80 ring-slate-900/5 opacity-55',
+              )}
+            >
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-on-background">{item.name}</p>
+                <p className="whitespace-nowrap text-xs font-bold text-primary">{item.price}</p>
+              </div>
+              {item.highlight && (
+                <span className="shrink-0 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold text-white">
+                  Select
+                </span>
+              )}
+            </motion.button>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function DirectCheckoutPhase({
+  onProceed,
+  onBack,
+  disabled,
+}: {
+  onProceed: () => void;
+  onBack: () => void;
+  disabled?: boolean;
+}) {
+  return (
+    <motion.div
+      key="direct_checkout"
+      layoutId="buyer-phase-shell"
+      {...phaseTransition}
+      className="w-full max-w-md space-y-4"
+    >
+      <div className="flex items-center justify-between">
+        <PhaseBackButton onClick={onBack} />
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">Step 3 · Checkout</p>
+      </div>
+
+      <div className="rounded-2xl bg-white/90 p-5 shadow-[0_16px_40px_-18px_rgba(70,72,212,0.28)] ring-1 ring-slate-900/5 backdrop-blur-xl">
+        <div className="mb-4 flex items-center gap-2">
+          <Icon name="shopping_cart" className="size-8 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
+          <div>
+            <h3 className="text-sm font-bold text-on-background">Order Summary</h3>
+            <p className="text-xs text-slate-500">{DIRECT_VENDOR.name}</p>
+          </div>
+        </div>
+
+        <div className="space-y-3 rounded-xl bg-slate-50/90 p-3.5 ring-1 ring-slate-900/5">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-on-background">Cement (50kg Bag)</p>
+              <p className="text-xs text-slate-500">Building Materials</p>
+            </div>
+            <p className="shrink-0 whitespace-nowrap text-sm font-bold text-primary">95,000 GNF</p>
+          </div>
+
+          <div className="flex items-center justify-between gap-3 border-t border-slate-200/70 pt-3">
+            <span className="text-xs font-medium text-slate-500">Quantity</span>
+            <div className="inline-flex items-center gap-3 rounded-xl bg-white px-3 py-1.5 ring-1 ring-slate-900/5">
+              <span className="text-sm font-bold text-slate-300">−</span>
+              <span className="min-w-[1.25rem] text-center text-sm font-bold text-on-background">1</span>
+              <span className="text-sm font-bold text-slate-300">+</span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between gap-3 border-t border-slate-200/70 pt-3">
+            <span className="text-xs font-semibold text-slate-700">Total Price</span>
+            <span className="whitespace-nowrap text-base font-black text-primary">95,000 GNF</span>
+          </div>
+        </div>
+
+        <Button
+          onClick={onProceed}
+          disabled={disabled}
+          className="mt-5 w-full justify-center py-3.5"
+        >
+          <Icon name="shield_lock" className="size-5 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
+          Proceed to Payment
+        </Button>
+      </div>
+    </motion.div>
+  );
+}
+
+function BiddingSetupPhase({
+  onSubmit,
+  onBack,
+  disabled,
+}: {
+  onSubmit: () => void;
+  onBack: () => void;
+  disabled?: boolean;
+}) {
+  return (
+    <motion.div
+      key="bidding_setup"
+      layoutId="buyer-phase-shell"
+      {...phaseTransition}
+      className="w-full max-w-md space-y-4"
+    >
+      <div className="flex items-center justify-between">
+        <PhaseBackButton onClick={onBack} />
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-violet-500">Service Request</p>
+      </div>
+
+      <div className="rounded-2xl bg-white/90 p-5 shadow-[0_16px_40px_-18px_rgba(109,40,217,0.22)] ring-1 ring-slate-900/5 backdrop-blur-xl">
+        <div className="mb-5 flex items-center gap-2.5">
+          <IconBox size="sm" className="!size-11 bg-transparent ring-0 shadow-none">
+            <Icon name="gavel" className="size-9 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
+          </IconBox>
+          <div>
+            <h3 className="text-sm font-bold text-on-background">Post a Service Request</h3>
+            <p className="text-xs text-slate-500">Get competitive bids from verified vendors</p>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <div>
+            <label className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">
+              Search Location
+            </label>
+            <div className="flex items-center gap-2 rounded-xl bg-slate-50/90 px-3 py-3 ring-1 ring-slate-900/5">
+              <Icon name="search" className="size-5 shrink-0" />
+              <span className="text-sm font-semibold text-on-background">Conakry</span>
+            </div>
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">
+              Select Category
+            </label>
+            <div className="flex items-center gap-2 rounded-xl bg-violet-50/80 px-3 py-3 ring-1 ring-violet-500/15">
+              <Icon name="hub" className="size-5 shrink-0" />
+              <span className="text-sm font-semibold text-violet-900">Paint</span>
+            </div>
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">
+              Enter Budget
+            </label>
+            <div className="flex items-center gap-2 rounded-xl bg-slate-50/90 px-3 py-3 ring-1 ring-slate-900/5">
+              <Icon name="account_balance_wallet" className="size-5 shrink-0" />
+              <span className="text-sm font-bold text-on-background">2,000,000 GNF</span>
+            </div>
+          </div>
+        </div>
+
+        <Button
+          onClick={onSubmit}
+          disabled={disabled}
+          className="mt-5 w-full justify-center py-3.5"
+        >
+          <Icon name="gavel" className="size-5 drop-shadow-[0_4px_8px_rgba(15,23,42,0.14)]" />
+          Submit Request
+        </Button>
+      </div>
+    </motion.div>
   );
 }
 
@@ -375,7 +709,23 @@ export function DemoBuyerTab() {
     reset,
   } = useEscrowStore();
 
+  const [buyerPhase, setBuyerPhase] = useState<BuyerPhase>('selection');
   const fees = parseGnfAndCalculateFees(activeVendor.price);
+
+  const handleReset = () => {
+    reset();
+    setBuyerPhase('selection');
+  };
+
+  const handleProceedToPayment = () => {
+    placeOrder(DIRECT_VENDOR);
+    setBuyerPhase('selection');
+  };
+
+  const handleSubmitBidding = () => {
+    startBidding();
+    setBuyerPhase('selection');
+  };
 
   return (
     <AnimatePresence mode="wait">
@@ -387,7 +737,13 @@ export function DemoBuyerTab() {
       >
         <AnimatePresence>
           {isProcessing && (step === 'idle' || step === 'bidding') && (
-            <ProcessingOverlay message="Securing funds in Vault..." />
+            <ProcessingOverlay
+              message={
+                step === 'bidding' || buyerPhase === 'bidding_setup'
+                  ? 'Posting service request...'
+                  : 'Securing funds in Vault...'
+              }
+            />
           )}
         </AnimatePresence>
 
@@ -409,18 +765,52 @@ export function DemoBuyerTab() {
                 <span className="whitespace-nowrap font-semibold text-primary">{fees.sellerNet}</span> after fees.
               </p>
             </div>
-            <Button variant="outline" onClick={reset}>
+            <Button variant="outline" onClick={handleReset}>
               Start New Demo
             </Button>
           </>
         )}
 
         {step === 'idle' && (
-          <IdleChoiceGrid
-            disabled={isProcessing}
-            onBuyDirect={() => placeOrder(DIRECT_VENDOR)}
-            onPostRequest={startBidding}
-          />
+          <AnimatePresence mode="wait">
+            {buyerPhase === 'selection' && (
+              <IdleChoiceGrid
+                disabled={isProcessing}
+                onBuyDirect={() => setBuyerPhase('direct_search')}
+                onPostRequest={() => setBuyerPhase('bidding_setup')}
+              />
+            )}
+
+            {buyerPhase === 'direct_search' && (
+              <DirectSearchPhase
+                onBack={() => setBuyerPhase('selection')}
+                onSelectVendor={() => setBuyerPhase('direct_catalog')}
+              />
+            )}
+
+            {buyerPhase === 'direct_catalog' && (
+              <DirectCatalogPhase
+                onBack={() => setBuyerPhase('direct_search')}
+                onSelectProduct={() => setBuyerPhase('direct_checkout')}
+              />
+            )}
+
+            {buyerPhase === 'direct_checkout' && (
+              <DirectCheckoutPhase
+                disabled={isProcessing}
+                onBack={() => setBuyerPhase('direct_catalog')}
+                onProceed={handleProceedToPayment}
+              />
+            )}
+
+            {buyerPhase === 'bidding_setup' && (
+              <BiddingSetupPhase
+                disabled={isProcessing}
+                onBack={() => setBuyerPhase('selection')}
+                onSubmit={handleSubmitBidding}
+              />
+            )}
+          </AnimatePresence>
         )}
 
         {step === 'bidding' && (

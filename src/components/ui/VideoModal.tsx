@@ -24,10 +24,13 @@ import {
 } from 'react';
 import { cn } from '@/lib/utils';
 
-const VIDEO_SRC = '/Video/demo.mp4';
+const VIDEO_SRC = '/Video/demoreal.mp4';
 const SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 2] as const;
-const FRAME_W = 900;
-const FRAME_H = 600;
+/** Native video resolution (source is authored at this size) */
+const VIDEO_W = 1430;
+const VIDEO_H = 910;
+/** Compact on-screen player — keeps modal small while preserving 1430×910 aspect */
+const DISPLAY_MAX_W = 900;
 
 function formatTime(seconds: number) {
   if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
@@ -350,7 +353,7 @@ export function VideoModal({ open, onClose }: VideoModalProps) {
             className="relative z-10 w-full max-w-[900px]"
             onClick={stopBubble}
           >
-            {/* Fixed 900×600 stage (scales down on smaller screens, keeps 3:2) */}
+            {/* Compact stage; aspect matches 1430×910 source so video fits cleanly */}
             <div
               ref={shellRef}
               className={cn(
@@ -359,8 +362,8 @@ export function VideoModal({ open, onClose }: VideoModalProps) {
               )}
               style={{
                 width: '100%',
-                maxWidth: FRAME_W,
-                aspectRatio: `${FRAME_W} / ${FRAME_H}`,
+                maxWidth: DISPLAY_MAX_W,
+                aspectRatio: `${VIDEO_W} / ${VIDEO_H}`,
               }}
               onMouseMove={showControls}
               onMouseLeave={() => {
@@ -372,7 +375,7 @@ export function VideoModal({ open, onClose }: VideoModalProps) {
                 src={VIDEO_SRC}
                 playsInline
                 preload="metadata"
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-contain"
                 onClick={togglePlay}
                 onDoubleClick={() => void toggleFullscreen()}
               />

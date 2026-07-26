@@ -99,7 +99,7 @@ export const escrowRows: EscrowRow[] = [
 
 export const demoVendors: DemoVendor[] = [
   {
-    name: 'Diallo Cement Supply',
+    name: 'Mike Cement Supply',
     category: 'Building Materials',
     product: 'Cement (50kg Bag)',
     price: '95,000 GNF',

@@ -11,12 +11,15 @@ export function oddGridLastSpan(index: number, total: number): string | undefine
 }
 
 function formatGnf(amount: number): string {
-  return `${amount.toLocaleString('en-US')} GNF`;
+  const usd = Math.round(amount / 8510);
+  return `${amount.toLocaleString('en-US')} GNF (~$${usd} USD)`;
 }
 
-/** Parse a price like "95,000 GNF" and compute 2% platform fee totals. */
 export function parseGnfAndCalculateFees(priceString: string) {
-  const baseRaw = Number(priceString.replace(/[^\d]/g, '')) || 0;
+  // Extract ONLY the first sequence of numbers (the base GNF amount)
+  const match = priceString.match(/[\d,]+/);
+  const baseRaw = match ? Number(match[0].replace(/,/g, '')) : 0;
+
   const feeRaw = Math.round(baseRaw * 0.02);
   const buyerTotalRaw = baseRaw + feeRaw;
   const sellerNetRaw = baseRaw - feeRaw;

@@ -46,9 +46,9 @@ const bidItemVariants = {
 };
 
 const CATALOG_ITEMS = [
-  { name: 'Cement (50kg Bag)', price: '95,000 GNF', highlight: true },
-  { name: 'Cement (25kg Bag)', price: '52,000 GNF', highlight: false },
-  { name: 'Sand (1 ton)', price: '180,000 GNF', highlight: false },
+  { name: 'Cement (50kg Bag)', price: '95,000 GNF (~$11 USD)', highlight: true },
+  { name: 'Cement (25kg Bag)', price: '52,000 GNF (~$6 USD)', highlight: false },
+  { name: 'Sand (1 ton)', price: '180,000 GNF (~$21 USD)', highlight: false },
 ];
 
 function PhaseBackButton({ onClick, label = 'Back' }: { onClick: () => void; label?: string }) {
@@ -516,7 +516,7 @@ function DirectCheckoutPhase({
               <p className="text-sm font-semibold text-on-background">Cement (50kg Bag)</p>
               <p className="text-xs text-slate-500">Building Materials</p>
             </div>
-            <p className="shrink-0 whitespace-nowrap text-sm font-bold text-primary">95,000 GNF</p>
+            <p className="shrink-0 whitespace-nowrap text-sm font-bold text-primary">95,000 GNF (~$11 USD)</p>
           </div>
 
           <div className="flex items-center justify-between gap-3 border-t border-slate-200/70 pt-3">
@@ -530,7 +530,7 @@ function DirectCheckoutPhase({
 
           <div className="flex items-center justify-between gap-3 border-t border-slate-200/70 pt-3">
             <span className="text-xs font-semibold text-slate-700">Total Price</span>
-            <span className="whitespace-nowrap text-base font-black text-primary">95,000 GNF</span>
+            <span className="whitespace-nowrap text-base font-black text-primary">95,000 GNF (~$11 USD)</span>
           </div>
         </div>
 
@@ -606,7 +606,7 @@ function BiddingSetupPhase({
             </label>
             <div className="flex items-center gap-2 rounded-xl bg-slate-50/90 px-3 py-3 ring-1 ring-slate-900/5">
               <Icon name="account_balance_wallet" className="size-5 shrink-0" />
-              <span className="text-sm font-bold text-on-background">2,000,000 GNF</span>
+              <span className="text-sm font-bold text-on-background">2,000,000 GNF (~$235 USD)</span>
             </div>
           </div>
         </div>

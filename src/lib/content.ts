@@ -102,19 +102,40 @@ export const demoVendors: DemoVendor[] = [
     name: 'Mike Cement Supply',
     category: 'Building Materials',
     product: 'Cement (50kg Bag)',
-    price: '95,000 GNF',
+    price: '95,000 GNF (~$11 USD)',
   },
   {
     name: 'Bah Paint Services',
     category: 'Home Services',
     product: 'Interior & Exterior Painting',
-    price: '1,500,000 GNF',
+    price: '1,500,000 GNF (~$176 USD)',
   },
   {
     name: 'Camara Bulk Foods',
     category: 'Bulk Food Supplier',
     product: 'Rice (50kg Bag)',
-    price: '450,000 GNF',
+    price: '450,000 GNF (~$53 USD)',
+  },
+];
+
+export const biddingVendors: DemoVendor[] = [
+  {
+    name: 'Mike Paint Services',
+    category: 'Home Services',
+    product: 'Interior & Exterior Painting',
+    price: '1,450,000 GNF (~$170 USD)',
+  },
+  {
+    name: 'Elite Painting',
+    category: 'Home Services',
+    product: 'Residential & Commercial Painting',
+    price: '1,650,000 GNF (~$194 USD)',
+  },
+  {
+    name: 'Pro Painting',
+    category: 'Home Services',
+    product: 'Interior Painting & Finishing',
+    price: '1,850,000 GNF (~$217 USD)',
   },
 ];
 

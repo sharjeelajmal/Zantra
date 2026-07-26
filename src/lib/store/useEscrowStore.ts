@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { demoVendors, type DemoVendor } from '@/lib/content';
+import { biddingVendors, demoVendors, type DemoVendor } from '@/lib/content';
 
 export type EscrowStep = 'idle' | 'bidding' | 'locked' | 'delivered' | 'released' | 'withdrawn';
 
@@ -48,7 +48,7 @@ export const useEscrowStore = create<EscrowState>((set, get) => ({
   startBidding: () => {
     const { step, isProcessing } = get();
     if (step !== 'idle' || isProcessing) return;
-    set({ step: 'bidding', bids: [...demoVendors], error: null });
+    set({ step: 'bidding', bids: [...biddingVendors], error: null });
   },
 
   acceptBid: (vendor) => {
